@@ -11,8 +11,22 @@ La cartella `mperceptron` contiene un notebook Python con l'implementazione
 di un multi-layer perceptron, con un solo layer nascosto, configurato per classificare
 le immagini dei caratteri numerici dal dataset mnist. 
 
+La cartella `tokenizer` contiene un notebook Python con un semplice esempio
+di tokenizzazione con `tiktoken` di OpenAI.
+
+La cartella `chatgpt0` contiene un notebook Python con il più semplice esempio
+di uso dell'API di ChatGPT.
+
+
 ---
 I notebook Python possono essere scaricati, per eseguirli localmente: una volta visualizzato il notebook a cui si è interessati, è sufficiente fare click con il tasto di destra sul pulsante "Raw" e scegliere "Save link as..."
+
+---
+Per usare l'API di ChatGPT occorre prima di tutto:
+* attivare un account OpenAI (vedi https://platform.openai.com/account)
+* attivare il metodo di pagamento
+* generare una nuova chiave, copiarla e scriverla (per Linux) per esempio in `.bashrc`:  
+    `export OPENAI_API_KEY=...`
 
 ---
 La procedura per preparare l'esecuzione di un notebook Python (provata per VSCode su una macchina Linux con Anaconda installato; su Windows e MacOS non dovrebbe essere molto diverso):
