@@ -5,7 +5,11 @@ dunque con più interesse per la comprensibilità che per l'efficienza, la compl
 
 La cartella `perceptron` contiene un notebook Python con l'implementazione
 di un single-layer perceptron, dunque plausibilmente la più semplice rete neurale
-(così semplice da essere costituita da un solo neurone...)
+(così semplice da essere costituita da un solo neurone...).
+
+La cartella `mperceptron` contiene un notebook Python con l'implementazione
+di un multi-layer perceptron, con un solo layer nascosto, configurato per classificare
+le immagini dei caratteri numerici dal dataset mnist. 
 
 ---
 I notebook Python possono essere scaricati, per eseguirli localmente: una volta visualizzato il notebook a cui si è interessati, è sufficiente fare click con il tasto di destra sul pulsante "Raw" e scegliere "Save link as..."
