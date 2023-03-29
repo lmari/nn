@@ -1,21 +1,18 @@
 # nn
 
-Questo repository propone esempi di reti neurali, _a solo scopo didattico_:
-dunque con più interesse per la comprensibilità che per l'efficienza, la completezza, ecc.
+Questo repository propone esempi di reti neurali, _a solo scopo didattico_: dunque con più interesse per la comprensibilità che per l'efficienza, la completezza, ecc.
 
-La cartella `perceptron` contiene un notebook Python con l'implementazione
-di un single-layer perceptron, dunque plausibilmente la più semplice rete neurale
-(così semplice da essere costituita da un solo neurone...).
+La cartella `perceptron` contiene un notebook Python con l'implementazione di un single-layer perceptron, dunque plausibilmente la più semplice rete neurale (così semplice da essere costituita da un solo neurone...).
 
-La cartella `mperceptron` contiene un notebook Python con l'implementazione
-di un multi-layer perceptron, con un solo layer nascosto, configurato per classificare
-le immagini dei caratteri numerici dal dataset mnist. 
+La cartella `mperceptron` contiene un notebook Python con l'implementazione di un multi-layer perceptron, con un solo layer nascosto, configurato per classificare le immagini dei caratteri numerici dal dataset `mnist` (rispetto a un'implementazione standard, qui si prova a tener conto anche dell'incertezza di classificazione).
 
-La cartella `tokenizer` contiene un notebook Python con un semplice esempio
-di tokenizzazione con `tiktoken` di OpenAI.
+La cartella `poly` contiene dei notebook Python con esempi di approssimazione di funzioni reali.
 
-La cartella `chatgpt0` contiene un notebook Python con il più semplice esempio
-di uso dell'API di ChatGPT.
+La cartella `tokenizer` contiene un notebook Python con un semplice esempio di tokenizzazione con `tiktoken` di OpenAI.
+
+La cartella `chatgpt0` contiene un notebook Python con il più semplice esempio di uso dell'API di ChatGPT.
+
+La cartella `testGPU` contiene un notebook Python con un esempio di una stessa funzione Python eseguita in CPU e in GPU, grazie al modulo `numba`, mostrando una riduzione dei tempi di esecuzione di almeno un'ordine di grandezza.
 
 
 ---
