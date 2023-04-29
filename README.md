@@ -2,17 +2,21 @@
 
 Questo repository propone esempi di reti neurali, _a solo scopo didattico_: dunque con più interesse per la comprensibilità che per l'efficienza, la completezza, ecc.
 
-La cartella `perceptron` contiene un notebook Python con l'implementazione di un single-layer perceptron, dunque plausibilmente la più semplice rete neurale (così semplice da essere costituita da un solo neurone...).
+Il repository è organizzato in cartelle, ognuna relativa a un argomento di sperimentazione, realizzato attraverso uno o più notebook Python.
 
-La cartella `mperceptron` contiene un notebook Python con l'implementazione di un multi-layer perceptron, con un solo layer nascosto, configurato per classificare le immagini dei caratteri numerici dal dataset `mnist` (rispetto a un'implementazione standard, qui si prova a tener conto anche dell'incertezza di classificazione).
+* `perceptron`: implementazione di un single-layer perceptron, dunque plausibilmente la più semplice rete neurale (così semplice da essere costituita da un solo neurone...) (`numpy`)
 
-La cartella `poly` contiene dei notebook Python con esempi di approssimazione di funzioni reali.
+* `mperceptron`: implementazione di un multi-layer perceptron, con un solo layer nascosto, configurato per classificare le immagini dei caratteri numerici dal dataset `mnist` (rispetto a un'implementazione standard, qui si prova a tener conto anche dell'incertezza di classificazione) (`numpy`)
 
-La cartella `tokenizer` contiene un notebook Python con un semplice esempio di tokenizzazione con `tiktoken` di OpenAI.
+* `poly`: esempi di approssimazione di funzioni reali  (`numpy`, `pytorch`)
 
-La cartella `chatgpt0` contiene un notebook Python con il più semplice esempio di uso dell'API di ChatGPT.
+* `backprop`: un semplice esempio della logica della backpropagation, con `micrograd`
 
-La cartella `testGPU` contiene un notebook Python con un esempio di una stessa funzione Python eseguita in CPU e in GPU, grazie al modulo `numba`, mostrando una riduzione dei tempi di esecuzione di almeno un'ordine di grandezza.
+* `tokenizer`: un semplice esempio di tokenizzazione con `tiktoken` di OpenAI
+
+* `chatgpt0`: esempi di uso dell'API di ChatGPT
+
+* `testGPU`: esempio di una stessa funzione Python eseguita in CPU e in GPU, grazie al modulo `numba`, mostrando una riduzione dei tempi di esecuzione di almeno un'ordine di grandezza
 
 
 ---
@@ -41,3 +45,10 @@ La procedura per preparare l'esecuzione di un notebook Python (provata per VSCod
     `pipreqs`
 * installare i moduli richiesti:  
     `pip install -r requirements.txt`
+
+---
+L'ambiente virtuale `nn` contiene:
+* micrograd
+
+ed è per i notebook nelle cartelle:
+* backprop
