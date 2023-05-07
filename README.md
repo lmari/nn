@@ -16,6 +16,8 @@ Il repository è organizzato in cartelle, ognuna relativa a un argomento di sper
 
 * `chatgpt0`: esempi di uso dell'API di ChatGPT
 
+* `langchain`: esempi di uso di `langchain`
+
 * `testGPU`: esempio di una stessa funzione Python eseguita in CPU e in GPU, grazie al modulo `numba`, mostrando una riduzione dei tempi di esecuzione di almeno un'ordine di grandezza
 
 

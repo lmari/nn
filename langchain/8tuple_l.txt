@@ -1,0 +1,130 @@
+The 8-tuple: a formal tool for documenting and checking
+the consistency of the model of a dynamical system
+Luca Mari, version 6 November 2021		
+lmari@liuc.it	This work is licensed under a Creative Commons
+http://research.liuc.it/luca.mari	Attribution-NonCommercial-ShareAlike 4.0 International License
+
+______________________________________________
+Table of Contents
+The 8-tuple: a formal tool for documenting and checking
+the consistency of the model of a dynamical system	1
+Context	1
+Premise 1	1
+Premise 2	1
+Premise 3	2
+The 8-tuple	2
+Notes	3
+Interpreting the model	4
+Evaluating the model	5
+The 8-tuple and STGraph	6
+______________________________________________
+Context
+Once the qualitative aspects of a model have been established, and therefore in particular one or more causal diagrams have been drafted, its quantitative components can be developed, in which for each identified variable the analytical rule is provided for computing the value of the variable in each simulation step. According to a rather general strategy to accomplish this task, the model is specified through a sequence of eight elements, that we call “the 8-tuple” for short. It has the twofold purpose of being a tool to document the entire model and provide some conditions of checking its consistency.
+Premise 1
+The mathematical model of the behavior of a dynamical system is constituted of a set of variables interconnected by relations of functional dependence. For example, if a and b are two such variables, then b = f(a) formalizes that b depends via f on a. The variability of a can be due to several possible reasons (its value can depend on another variable, can be random, can be set by the user of the model, can be read from an existing time series), and is manifested in time, i.e., a = a(t), so that b(t) = f(a(t)). In this sense each variable of the model is, explicitly or implicitly, a function whose argument is t. According to a principle of functional decomposition, however, the reason why a changes in time can be neglected while studying how b changes in turn, as a function of a.
+Premise 2
+Formally, the 8-tuple is a mathematical, uninterpreted entity: it contains sets of constants and variables and functions connecting them. The interpretation of such constants and variables in terms of properties of the modeled system is not formally a task of the 8-tuple. However, 8-tuples are constructed to provide the mathematical specification for the behavior of dynamical systems, and as such they are usually presented in their interpreted form.
+Premise 3
+The 8-tuple is a mathematical model, not a computer implementation, which may faithfully and completely implement what the 8-tuple specifies, but may also implement the model only partially (a typical example: the model assumes continuous time; in the software implementation time is instead discrete).
+The 8-tuple
+The 8-tuple is:
+〈T, K, U, Ω, Y, X, φ, η〉
+and its elements are defined as follows.
+
+The set T of times in which the model is to be computed, where t ∊ T is then the independent variable of the model, having values with a specified measurement unit.
+The set T may be a real interval, T = [t0, t1], thus under the hypothesis of continuous time, or a sequence T = {t0, t1, …, tn}, in the case of discrete time. In this case if, as usual, the interval between contiguous times is constant, ti+1 = ti+Δt, with Δt taken as constant, the set of times is completely defined by the start time, t0, the end time, tn, and the interval Δt, that may be called the time step, whereas  t1 –  t0 may be called the time span.
+If, as usual, the model is assumed to be time invariant, t0 is conventional, and therefore the choice t0 = 0 is usual.
+The end time tn could be a priori unknown and not relevant, and it may be omitted.
+In some cases the model is expected to be computed until a condition, evaluated on a model variable, becomes true; a notation such as
+tn when condition
+may be then used.
+Finally, some models are designed to be recomputed not each time step, but whenever an event occurs: in these cases T is the set of the events that trigger the computation of the model.
+
+The set K of the input constants of the model.
+Each element of K is a constant ki (possibly with a measurement unit, to be specified) that could be included as an input element in the black box model of the system. While not directly influencing the dynamics of the system, each ki is interpreted into a system parameter and may be operated on in a sensitivity analysis, and therefore should be specified. With the aim of avoiding over-specifications, together with ki a set of acceptable values could be specified, where in this case ki operates as the default value. The values or the ranges of two or more parameters may be mutually dependent (if k1 is chosen less than a given threshold, then k2 must be chosen in a given subrange): this constraint just be somehow specified in K.
+For each state variable, its initial state (what in physics is called the initial condition) is a parameter in K.
+Though not a usual situation, K can be empty, K = ∅.
+
+The set U of the ranges of the input variables of the model.
+In the simple case in which the model has only one input variable u, the set U is the range of u, intended as a function of time, u: T→U, i.e., the set of the possible values that u can take while the model is computed. The algebraic structure of U should be somehow specified: it may be continuous or discrete, infinite or finite, equipped with a metric, an order, etc or not, numeric or not. If it is the case, the measurement unit of the values in U must be specified.
+More generally, the model may have n scalar input functions, u1,...,un, each with its own range U1,...,Un, each Ui having its own algebraic structure to be somehow specified. In this case, the set U is the Cartesian product U1×...×Un, i.e., each input value is the ordered sequence of n scalar values, and it is only conventional whether the input is considered to be the sequence of n scalar functions or one vector function. If, for example, the model has two input scalar functions, u1 and u2, then U = U1×U2, and therefore u1: T→U1 and u2: T→U2, or equivalently u = (u1,u2) and u: T→U.
+Each function taking values in U could be included as an input element in the black box model of the system, is interpreted as a property of the environment (that includes the decision maker, if present) to which the system is modeled to be sensitive, and may be included in a sensitivity analysis.
+U may be empty, U = ∅, and in this case the model is said to be closed or autonomous. If U is not empty then the model is said to be open.
+
+The set Ω ⊆ {u: T → U} of the admissible input functions of the model.
+By definition, the analytical form of the input function u is not known. Together with its domain and range, the set Ω specifies some more constraints on the functions that the model accepts as inputs.
+For example, if T is continuous a condition specified by Ω might be that u must be continuous, or even differentiable; if T is discrete a condition specified by Ω might be that in each instant the sum of the values of u is less than a given constant. That is, Ω = {u: T → U, such that...}.
+By means of Ω the condition might be given that the inputs are random values, obtained by sampling a specified probability distribution.
+If no constraints are imposed on the input function then Ω = {u: T → U}.
+If U = ∅ then Ω is undefined.
+
+The set Y of the ranges of the output variables of the model.
+As in the case of U, if the model has only one output variable y, the set Y is the range of y, intended as a function of time, y: T→Y, i.e., the set of the possible values that y can take while the model is computed. What is written above about the algebraic structure, the measurement unit, and the scale vs vector representation of U applies identically to Y.
+Since it is supposed that a system is modeled with the aim of computing and observing the modeled behavior, Y cannot be empty, Y ≠ ∅.
+
+The set X of the ranges of the state variables of the model.
+As in the case of U and Y, if the model has only one state variable x, the set X is the range of x, intended as a function of time, x: T→X, i.e., the set of the possible values that x can take while the model is computed. What is written above about the algebraic structure, the measurement unit, and the scale vs vector representation of U and Y applies identically to X.
+X may be empty, X = ∅, and in this case the model is said to be algebraic and it does not have, properly, a dynamics. If X is not empty then the model is said to be dynamical.
+
+The local state transition function (also called next state function) φ: U×X→X.
+The function φ formalizes the evolution of the state variables by computing their variation in time. It is a diachronic function: if T is continuous, dx(t)/dt = φ(u(t), x(t)); if T is discrete, x(t + Δt) = φ(u(t), x(t)).
+If the state is constituted of several scalar variables, φ is a vector function and for each scalar state variable a scalar component of φ must be defined.
+For each scalar state variable the initial value, also called initial state, x(t0), is not computed and must be specified as an element of K.
+In the case of closed models, φ: X→X. In the case of algebraic models φ is not defined.
+
+The behavior function η: U×X→Y.
+The function η formalizes the evolution of output variables by computing their variation in time. It is a synchronic function, y(t) = η(u(t), x(t)).
+If the output is constituted of several scalar variables, η is a vector function and for each scalar output variable a scalar component of η must be defined.
+In the case of closed models, η: X→Y. In the case of algebraic models, η: U→Y. As a consequence, a closed algebraic model cannot have time variable outputs, and therefore it is static.
+Notes
+1. If the model is structured into submodels, it is usually assumed that the set of times T is set in the supermodel and inherited by all submodels, according to the hypothesis of synchronism between the supermodel and its submodels. The other 7 elements of the 8-tuple are instead specific to each model.
+The input constants, input variables, and output variables of each model are only accessible by its container model.
+
+2. The 8-tuple does not include algebraic (i.e., non-state) internal (i.e., non input and non output) variables. The reason is that they do contribute neither to the structure nor to the time evolution of the model, and are possibly introduced as a convenient means to simplify the definition of the functions φ and η by making it modular, according to a principle of functional decomposition.
+
+3. About the relations among input, state, and output variables the following conditions are given.
+– Inputs are exogenous variables, describing the effects of the environment, including the model user, on the system; hence an input variable cannot be a state variable.
+– States are internal variables, describing the dynamics of the system; hence a state variable cannot be an input variable; a state can be exposed by making it also an output variable.
+– Outputs can be input, state, or other internal (algebraic) variables: each variable can be in fact an output variable.
+In principle, a state variable that is also an output variable is characterized by both a local state transition function φ and a behavior function η, thus implying that the state and the value may be different. If a behavior function η is not specified, then implicitly y(t) = x(t), i.e., the value is the same as the state.
+
+4. While the domain of both the local state transition function φ and the behavior function η has been defined as the set of inputs and states of the model, sometimes the explicit dependence of these functions on time is appropriate. Let us see why also in this case there is no need to extend the domain. First, if T is discrete the functions could depend on Δt, which on the other hand is constant and therefore a parameter, not an argument, of the functions. Second, the functions could actually depend on the current time t, but this should be intended as the dependence on t – t0, the width of the time interval from the start time t0, according to the assumption of time stationarity of the model. Under this hypothesis, t can then be simply interpreted as a further state variable, whose initial state is t0 and that operates as an accumulator.
+
+5. The local state transition function φ and the state function x are related but distinct functions. Their relation is particularly clear in the case T is discrete. The local state transition function x(t + Δt) = φ(u(t), x(t)) computes the next state as a function of the current input and the current state, and time remains the implicit independent variable of the input and the state. Hence starting from the initial state x(t0) in order to obtain x(t + 2Δt) the function must be computed twice, x(t0 + Δt) = φ(u(t0), x(t0)) and then x(t0 + 2Δt) = φ(u(t0 + Δt), x(t0 + Δt)) = φ(u(t0 + Δt), φ(u(t0), x(t0))).
+Being part of the 8-tuple, the function φ is explicitly specified in its analytical form in the construction of the model. Vice versa, the state function x(t) is not part of the 8-tuple, and it is computed through the iterated computation of φ. Hence φ is the local-time description of the system dynamics and x is the corresponding global-time description. From a mathematical point of view, x is then the solution of the equation x(t + Δt) = φ(u(t), x(t)): in many cases the explicit analytical form of x is not obtained (also because a technique for the analytical solution of the equation could not be known), and the solution is provided as the numerical sequence 〈x(t0), x(t0 + Δt), x(t0 + 2Δt), ...〉, resulting from the model computation.
+Analogous is the case of the relation between the behavior function η and the output function y: while the former is part of the 8-tuple, the latter is not; η describes the local-time behavior of the system, y describes the global-time behavior of the system, and is trivially obtained from the equation y(t) = η(u(t), x(t)) if / when the analytical form of both u(t) and x(t) is known.
+Interpreting the model
+The 8-tuple is an uninterpreted (syntactic) mathematical entity: its interpretation into a system is required to make it a model of the system. Hence a given 8-tuple is a model of a system if it is interpreted into the system (note that in mathematical logic the starting point is a formal system, which may be interpreted into a model; hence the lexicon is reversed in that case: the 8-tuple is the formal system and the system is its model).
+A structural interpretation generally consists in defining an interpretation function int that maps model variables and constants to system properties and parameters:
+	system properties and parameters = int(model variables and constants)
+Some variables or constants of the model may be introduced for computational purposes only, and therefore they are not expected to correspond to anything that can be evaluated in the modeled system. In a complementary way, not all known system properties and parameters need to be mapped into the model, since in fact models are constructed relatively to some specific aspects of the modeled systems.
+Let us call “interface entities” the model input variables, output variables, and input constants, and let us call “internal entities” all model variables and constants which are not interface entities (it should be clear that being an interface entity relates to the interpreting model, not to the interpreted system). A structural interpretation requires that at least each interface entity of the model is mapped into a system property or parameter, so that the minimal structural interpretation is defined by:
+	system properties = int(model input variables)
+	system properties = int(model output variables)
+	system parameters = int(model input constants)
+The interpretation function int is supposed to be invertible, i.e., distinct interface entities of the model are mapped into distinct properties or parameters of the modeled system.
+Evaluating the model (scenario analysis and sensitivity analysis)
+Once the 8-tuple has been constructed, the definition of an interpretation function is the condition for providing the 8-tuple with a representational capacity and therefore for target-directed model evaluation.
+On the basis of such a structural interpretation, a numerical characterization needs to be given of the model. This generally consists in obtaining values for the relevant environment and system properties and parameters, through information sources such as existing datasets, interviews, measurements, etc, in at least two distinct times, t0 and t1, and then performing the following procedure:
+1. values of the input constants of the model, including the initial values of the model state variables, are assigned according to numerical values of the corresponding system parameters at the time t0 (model setup and tuning) (the values can be maintained as such or can be scaled);
+2. values of the input variables of the model are assigned according to numerical values of the corresponding environmental properties, from t0 to t1;
+3. the model is computed as specified in its temporal structure, from t0 to t1;
+4. the values of the model output variables (the final values or the whole sequences of values) are compared with the (properly scaled, if necessary) values of the corresponding system properties at the time t1.
+The values set in the steps 1 and 2 are called a scenario, and such an evaluation can be generically called a scenario analysis, in which starting from the available data on the system at the time t0 the model is computed to generate a predicted system behavior at the time t1, that is then compared with the actual data to assess the quality of the model in the given scenario.
+A second technique of model evaluation is sensitivity analysis, which is instead aimed at checking whether the dependence of changes of model outputs on changes of model inputs is as expected. In the simplest case, the analysis is performed on one output variable y(t) and one input variable u(t): while all input constants and all other input variables are set to fixed values, a value is set to u(t0) and the value y(t0) is computed, then a different value is set to u(t0 + Δt) and the new value y(t0 + Δt) is computed. The sensitivity of the mapping u → y is defined as Δy / Δu = [y(t + Δt) – y(t)] / [u(t + Δt) – u(t)].
+A null sensitivity corresponds to the fact that the output variable does not change its value despite the change of the input variable, and might be considered the hint of a mistaken relation, given that an input variable that does not affect output variables can be removed from the model without hindering its behavior. A big sensitivity corresponds to the fact that the output variable greatly changes its value even with small changes of the input variable, and might be considered the hint of an unstable behavior of the model. 
+A sensitivity analysis can be performed also on input constants: again, the discovery that changes of the constant do not produce changes in the output variable might lead to the conclusion that the constant can be removed.
+More sophisticated sensitivity analyses relate changes in more than two time instants, and changes of more than one input variable to changes of more than one output variable, but they quickly become very hard to manage due to the combinatorial explosion of cases to deal with.
+The 8-tuple and STGraph
+STGraph has been designed so as to allow an almost one-to-one implementation of a model defined by a 8-tuple, into a software simulator that computes the numerical solution of the equations x(t + Δt) = φ(u(t), x(t)) and y(t) = η(u(t), x(t)).
+The following are the main specifications and constraints of an implementation in STGraph:
+all sets are discrete;
+model variables and constants are implemented as graph nodes; nodes can be algebraic (constants, input variables, output variables), state (state variables, possibly defined as output), and state with output (state variables);
+the set of times T is implicitly defined by the system variables time0 (start time), timeD (time step Δt), and time1 (end time);
+the set of the input constants K is the Cartesian product of the ranges of the input constants, each of them implemented as a constant algebraic node with no entering arrows;
+the set of the input values U is the Cartesian product of the ranges of the input functions, each of them implemented as a variable algebraic node with no entering arrows;
+the set of admissible input functions Ω is only implicitly defined by the conditions, implemented in the input nodes or other nodes, limiting the possible values of the input functions;
+the set of the output values Y is the Cartesian product of the ranges of the output functions, each of them implemented as an output node, i.e., an algebraic or state node whose “is output” switch is on;
+the set of the state values X is the Cartesian product of the ranges of the state functions, each of them implemented as a state node; for each state node, the system variable this stores the current state, x(t), and the system variable me stores the just computed next state x(t + Δt);
+the next state function φ is implemented in the state nodes;
+the behavior function η is implemented in the output nodes; in the state nodes defined as output the behavior function is implicitly defined as y(t) = η(u(t), x(t)) = x(t), i.e., the value of the node is this; in state with output nodes the behavior function is implemented explicitly.

@@ -1,0 +1,58 @@
+The 8-tuple: a formal tool for documenting and checking the consistency of the model of a dynamical system
+
+Once the qualitative aspects of a model have been established, and therefore in particular one or more causal diagrams have been drafted, its quantitative components can be developed, in which for each identified variable the analytical rule is provided for computing the value of the variable in each simulation step. According to a rather general strategy to accomplish this task, the model is specified through a sequence of eight elements, that we call “the 8-tuple” for short. It has the twofold purpose of being a tool to document the entire model and provide some conditions of checking its consistency.
+Premise 1
+The mathematical model of the behavior of a dynamical system is constituted of a set of variables interconnected by relations of functional dependence. For example, if a and b are two such variables, then b = f(a) formalizes that b depends via f on a. The variability of a can be due to several possible reasons (its value can depend on another variable, can be random, can be set by the user of the model, can be read from an existing time series), and is manifested in time, i.e., a = a(t), so that b(t) = f(a(t)). In this sense each variable of the model is, explicitly or implicitly, a function whose argument is t. According to a principle of functional decomposition, however, the reason why a changes in time can be neglected while studying how b changes in turn, as a function of a.
+Premise 2
+Formally, the 8-tuple is a mathematical, uninterpreted entity: it contains sets of constants and variables and functions connecting them. The interpretation of such constants and variables in terms of properties of the modeled system is not formally a task of the 8-tuple. However, 8-tuples are constructed to provide the mathematical specification for the behavior of dynamical systems, and as such they are usually presented in their interpreted form.
+Premise 3
+The 8-tuple is a mathematical model, not a computer implementation, which may faithfully and completely implement what the 8-tuple specifies, but may also implement the model only partially (a typical example: the model assumes continuous time; in the software implementation time is instead discrete).
+
+The 8-tuple is: 〈T, K, U, Ω, Y, X, φ, η〉
+and its elements are defined as follows.
+
+The set T of times in which the model is to be computed, where t ∊ T is then the independent variable of the model, having values with a specified measurement unit.
+The set T may be a real interval, T = [t0, t1], thus under the hypothesis of continuous time, or a sequence T = {t0, t1, …, tn}, in the case of discrete time. In this case if, as usual, the interval between contiguous times is constant, ti+1 = ti+Δt, with Δt taken as constant, the set of times is completely defined by the start time, t0, the end time, tn, and the interval Δt, that may be called the time step, whereas  t1 –  t0 may be called the time span.
+If, as usual, the model is assumed to be time invariant, t0 is conventional, and therefore the choice t0 = 0 is usual.
+The end time tn could be a priori unknown and not relevant, and it may be omitted.
+In some cases the model is expected to be computed until a condition, evaluated on a model variable, becomes true; a notation such as
+tn when condition
+may be then used.
+Finally, some models are designed to be recomputed not each time step, but whenever an event occurs: in these cases T is the set of the events that trigger the computation of the model.
+
+The set K of the input constants of the model.
+Each element of K is a constant ki (possibly with a measurement unit, to be specified) that could be included as an input element in the black box model of the system. While not directly influencing the dynamics of the system, each ki is interpreted into a system parameter and may be operated on in a sensitivity analysis, and therefore should be specified. With the aim of avoiding over-specifications, together with ki a set of acceptable values could be specified, where in this case ki operates as the default value. The values or the ranges of two or more parameters may be mutually dependent (if k1 is chosen less than a given threshold, then k2 must be chosen in a given subrange): this constraint just be somehow specified in K.
+For each state variable, its initial state (what in physics is called the initial condition) is a parameter in K.
+Though not a usual situation, K can be empty, K = ∅.
+
+The set U of the ranges of the input variables of the model.
+In the simple case in which the model has only one input variable u, the set U is the range of u, intended as a function of time, u: T→U, i.e., the set of the possible values that u can take while the model is computed. The algebraic structure of U should be somehow specified: it may be continuous or discrete, infinite or finite, equipped with a metric, an order, etc or not, numeric or not. If it is the case, the measurement unit of the values in U must be specified.
+More generally, the model may have n scalar input functions, u1,...,un, each with its own range U1,...,Un, each Ui having its own algebraic structure to be somehow specified. In this case, the set U is the Cartesian product U1×...×Un, i.e., each input value is the ordered sequence of n scalar values, and it is only conventional whether the input is considered to be the sequence of n scalar functions or one vector function. If, for example, the model has two input scalar functions, u1 and u2, then U = U1×U2, and therefore u1: T→U1 and u2: T→U2, or equivalently u = (u1,u2) and u: T→U.
+Each function taking values in U could be included as an input element in the black box model of the system, is interpreted as a property of the environment (that includes the decision maker, if present) to which the system is modeled to be sensitive, and may be included in a sensitivity analysis.
+U may be empty, U = ∅, and in this case the model is said to be closed or autonomous. If U is not empty then the model is said to be open.
+
+The set Ω ⊆ {u: T → U} of the admissible input functions of the model.
+By definition, the analytical form of the input function u is not known. Together with its domain and range, the set Ω specifies some more constraints on the functions that the model accepts as inputs.
+For example, if T is continuous a condition specified by Ω might be that u must be continuous, or even differentiable; if T is discrete a condition specified by Ω might be that in each instant the sum of the values of u is less than a given constant. That is, Ω = {u: T → U, such that...}.
+By means of Ω the condition might be given that the inputs are random values, obtained by sampling a specified probability distribution.
+If no constraints are imposed on the input function then Ω = {u: T → U}.
+If U = ∅ then Ω is undefined.
+
+The set Y of the ranges of the output variables of the model.
+As in the case of U, if the model has only one output variable y, the set Y is the range of y, intended as a function of time, y: T→Y, i.e., the set of the possible values that y can take while the model is computed. What is written above about the algebraic structure, the measurement unit, and the scale vs vector representation of U applies identically to Y.
+Since it is supposed that a system is modeled with the aim of computing and observing the modeled behavior, Y cannot be empty, Y ≠ ∅.
+
+The set X of the ranges of the state variables of the model.
+As in the case of U and Y, if the model has only one state variable x, the set X is the range of x, intended as a function of time, x: T→X, i.e., the set of the possible values that x can take while the model is computed. What is written above about the algebraic structure, the measurement unit, and the scale vs vector representation of U and Y applies identically to X.
+X may be empty, X = ∅, and in this case the model is said to be algebraic and it does not have, properly, a dynamics. If X is not empty then the model is said to be dynamical.
+
+The local state transition function (also called next state function) φ: U×X→X.
+The function φ formalizes the evolution of the state variables by computing their variation in time. It is a diachronic function: if T is continuous, dx(t)/dt = φ(u(t), x(t)); if T is discrete, x(t + Δt) = φ(u(t), x(t)).
+If the state is constituted of several scalar variables, φ is a vector function and for each scalar state variable a scalar component of φ must be defined.
+For each scalar state variable the initial value, also called initial state, x(t0), is not computed and must be specified as an element of K.
+In the case of closed models, φ: X→X. In the case of algebraic models φ is not defined.
+
+The behavior function η: U×X→Y.
+The function η formalizes the evolution of output variables by computing their variation in time. It is a synchronic function, y(t) = η(u(t), x(t)).
+If the output is constituted of several scalar variables, η is a vector function and for each scalar output variable a scalar component of η must be defined.
+In the case of closed models, η: X→Y. In the case of algebraic models, η: U→Y. As a consequence, a closed algebraic model cannot have time variable outputs, and therefore it is static.
