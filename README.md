@@ -4,19 +4,32 @@ Questo repository propone esempi di reti neurali, _a solo scopo didattico_: dunq
 
 Il repository è organizzato in cartelle, ognuna relativa a un argomento di sperimentazione, realizzato attraverso uno o più notebook Python.
 
-* `perceptron`: implementazione di un single-layer perceptron, dunque plausibilmente la più semplice rete neurale (così semplice da essere costituita da un solo neurone...) (`numpy`)
+* `perceptron`: implementazione di un single-layer perceptron, dunque plausibilmente la più semplice rete neurale (così semplice da essere costituita da un solo neurone...)
 
-* `mperceptron`: implementazione di un multi-layer perceptron, con un solo layer nascosto, configurato per classificare le immagini dei caratteri numerici dal dataset `mnist` (rispetto a un'implementazione standard, qui si prova a tener conto anche dell'incertezza di classificazione) (`numpy`)
+* `mperceptron`: implementazione di un multi-layer perceptron, con un solo layer nascosto, configurato per classificare le immagini dei caratteri numerici dal dataset `mnist` (rispetto a un'implementazione standard, qui si prova a tener conto anche dell'incertezza di classificazione)
 
-* `poly`: esempi di approssimazione di funzioni reali  (`numpy`, `pytorch`)
+* `poly`: esempi di approssimazione di funzioni reali
+    * `poly0`: l'implementazione in `numpy` di una semplice rete neurale -- con un neurone di input, uno strato nascosto, e un neurone di output -- per approssimare funzioni $\mathbb{R} \rightarrow \mathbb{R}$
+    * `poly1`: l'implementazione in `numpy` di un solutore che approssima funzioni $\mathbb{R} \rightarrow \mathbb{R}$ mediante un polinomio di grado $n$, di cui stima i parametri
+   * `poly1b`: l'implementazione in `pytorch` di un solutore che approssima funzioni $\mathbb{R} \rightarrow \mathbb{R}$ mediante un polinomio di grado $n$, di cui stima i parametri
+
+* `chatgpt0`: esempi di uso dell'API di ChatGPT
+    * `dialogo0`: il più semplice esempio di uso dell'API di ChatGPT
+    * `dialogo1`: un semplice esempio di uso dell'API di ChatGPT in modalità _streaming_/sequenziale
+    * `dialogo2`: un semplice esempio di uso dell'API di ChatGPT in modalità _speech-to-text_ e poi _text-to-speech_
+
+* `langchain`: esempi di uso di `langchain`
+    * `simpleQA`: il più semplice esempio di Q&A sul contenuto di un documento
+    * `complexQA`: un esempio di Q&A sul contenuto di un documento, con _embeddings_ e ricerca semantica di un _vector db_
+    * `mathQA`: un esempio di matematica
+    * `explicitChat.py`: un semplice esempio di chat con gpt
+    * `wrappedChat.py`: un semplice esempio di chat con gpt, con streaming della risposta
+    * `gpt4all`: il più semplice esempio di Q&A con un modello locale, gestito con `GPT4all`
+
 
 * `backprop`: un semplice esempio della logica della backpropagation, con `micrograd`
 
 * `tokenizer`: un semplice esempio di tokenizzazione con `tiktoken` di OpenAI
-
-* `chatgpt0`: esempi di uso dell'API di ChatGPT
-
-* `langchain`: esempi di uso di `langchain`
 
 * `testGPU`: esempio di una stessa funzione Python eseguita in CPU e in GPU, grazie al modulo `numba`, mostrando una riduzione dei tempi di esecuzione di almeno un'ordine di grandezza
 
@@ -47,10 +60,9 @@ La procedura per preparare l'esecuzione di un notebook Python (provata per VSCod
     `pipreqs`
 * installare i moduli richiesti:  
     `pip install -r requirements.txt`
+* elencare gli ambienti virtuali creati:
+    `conda env list`
 
 ---
-L'ambiente virtuale `nn` contiene:
-* micrograd
-
-ed è per i notebook nelle cartelle:
-* backprop
+virtenv `nn`: numpy, matplotlib, torch, requests, gzip  
+virtenv `langchain`: langchain, openai, chroma, chromadb, tiktoken, pygpt4all
