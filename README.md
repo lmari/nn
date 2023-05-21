@@ -2,7 +2,7 @@
 
 Questo repository propone esempi di reti neurali, _a solo scopo didattico_: dunque con più interesse per la comprensibilità che per l'efficienza, la completezza, ecc.
 
-Il repository è organizzato in cartelle, ognuna relativa a un argomento di sperimentazione, realizzato attraverso uno o più notebook Python.
+Il repository è organizzato in cartelle, ognuna relativa a un argomento di sperimentazione, realizzato attraverso uno o più notebook Python (o moduli Python, dove l'estensione `.py` è indicata).
 
 * `perceptron`: implementazione di un single-layer perceptron, dunque plausibilmente la più semplice rete neurale (così semplice da essere costituita da un solo neurone...)
 
@@ -12,6 +12,10 @@ Il repository è organizzato in cartelle, ognuna relativa a un argomento di sper
     * `poly0`: l'implementazione in `numpy` di una semplice rete neurale -- con un neurone di input, uno strato nascosto, e un neurone di output -- per approssimare funzioni $\mathbb{R} \rightarrow \mathbb{R}$
     * `poly1`: l'implementazione in `numpy` di un solutore che approssima funzioni $\mathbb{R} \rightarrow \mathbb{R}$ mediante un polinomio di grado $n$, di cui stima i parametri
    * `poly1b`: l'implementazione in `pytorch` di un solutore che approssima funzioni $\mathbb{R} \rightarrow \mathbb{R}$ mediante un polinomio di grado $n$, di cui stima i parametri
+
+* `word2vec`: esempi di accesso a un database di word embeddings:
+    * `word2vec`: esempi vari
+    * `explorer.py`: un'applicazione Flask per esplorare il database in modo interattivo
 
 * `chatgpt0`: esempi di uso dell'API di ChatGPT
     * `dialogo0`: il più semplice esempio di uso dell'API di ChatGPT
